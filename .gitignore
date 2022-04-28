@@ -1,0 +1,6 @@
+/.env
+/node_modules/
+/.idea/
+/build/
+yarn-error.log
+docker-compose.override.yml

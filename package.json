@@ -1,0 +1,45 @@
+{
+    "name": "nodejs-api-template",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/ravilock/nodejs-api-template.git",
+    "author": "ravilock <ravi.me.professional@hotmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "build": "tsc",
+        "debug": "ts-node-dev --inspect=0.0.0.0 --respawn --transpile-only src/Index.ts",
+        "dev": "ts-node-dev --respawn --transpile-only src/Index.ts",
+        "start": "NODE_ENV=production node ./build/src/Index.js",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "clean": "rm -rf build/*",
+        "lint": "eslint . --ext .ts",
+        "lint:fix": "yarn lint --fix",
+        "format": "prettier --check \"**/*.+(js|ts|json|md)\"",
+        "format:fix": "prettier --write \"**/*.+(js|ts|json|md)\""
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^5.20.0",
+        "@typescript-eslint/parser": "^5.20.0",
+        "eslint": "^8.14.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "prettier": "^2.6.2",
+        "ts-node": "^10.7.0",
+        "ts-node-dev": "^1.1.8",
+        "typescript": "^4.6.3"
+    },
+    "dependencies": {
+        "@types/node": "^17.0.25",
+        "axios": "^0.26.1",
+        "class-transformer": "^0.5.1",
+        "class-validator": "^0.13.2",
+        "compression": "^1.7.4",
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.0",
+        "express": "^4.17.3",
+        "helmet": "^5.0.2",
+        "knex": "^2.0.0",
+        "pg": "^8.7.3",
+        "uuid": "^8.3.2"
+    }
+}
