@@ -5,7 +5,7 @@ import ListTaxIdsDto from '../Dtos/ListTaxIdsDto';
 import ResourceAlreadyExistsException from '../../Api/Exception/ResourceAlreadyExistsException';
 
 export default class TaxIdRepository implements ITaxIdRepository {
-    public async findByTaxId(taxId: string, searchDeleted = false): Promise<TaxIdEntity> {
+    public async findByTaxId(taxId: string): Promise<TaxIdEntity> {
         const [queryResult] = <TaxIdEntity[]>(
             await KnexInstance('taxIds')
                 .select('uuid')
@@ -15,7 +15,6 @@ export default class TaxIdRepository implements ITaxIdRepository {
                 .select('createdAt')
                 .select('updatedAt')
                 .where('taxId', taxId)
-                .andWhere('deleted', searchDeleted)
                 .limit(1)
         );
 
@@ -39,7 +38,7 @@ export default class TaxIdRepository implements ITaxIdRepository {
     }
 
     public async delete(uuid: string): Promise<void> {
-        await KnexInstance('taxIds').update({ deleteAt: new Date(), deleted: true }).where('uuid', uuid);
+        await KnexInstance('taxIds').where('uuid', uuid).del();
     }
 
     public async findByUuid(uuid: string): Promise<TaxIdEntity> {
@@ -51,8 +50,6 @@ export default class TaxIdRepository implements ITaxIdRepository {
                 .select('startDate')
                 .select('createdAt')
                 .select('updatedAt')
-                .select('deleteAt')
-                .select('deleted')
                 .where('uuid', uuid)
                 .limit(1)
         );
@@ -68,14 +65,14 @@ export default class TaxIdRepository implements ITaxIdRepository {
         const { page, pageSize } = dto;
         const offset = (page - 1) * pageSize;
 
+        // eslint-disable-next-line prettier/prettier
         const query = KnexInstance('taxIds')
             .select('uuid')
             .select('taxId')
             .select('accountName')
             .select('startDate')
             .select('createdAt')
-            .select('updatedAt')
-            .where('deleted', false);
+            .select('updatedAt');
 
         if (dto.accountName && dto.accountName.length) query.whereLike('accountName', `%${dto.accountName}%`);
         if (dto.taxId && dto.taxId.length) query.whereLike('taxId', `%${dto.taxId}%`);
