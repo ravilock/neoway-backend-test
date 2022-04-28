@@ -1,11 +1,27 @@
 import express, { NextFunction, Request, Response } from 'express';
 import { isAliveController } from '../Home/Index';
-import { deleteTaxIdController, getTaxIdController, listTaxIdsController, postTaxIdController, updateTaxIdController } from '../TaxId/Index';
+import {
+    blockTaxIdController,
+    deleteTaxIdController,
+    getTaxIdController,
+    listTaxIdsController,
+    postTaxIdController,
+    unblockTaxIdController,
+    updateTaxIdController,
+} from '../TaxId/Index';
 
 const publicRoutes = express.Router();
 
 publicRoutes.get('/', (request: Request, response: Response, nextFunction: NextFunction) => {
     return isAliveController.handle(request, response, nextFunction);
+});
+
+publicRoutes.post('/taxId/:taxId/block', (request: Request, response: Response, nextFunction: NextFunction) => {
+    return blockTaxIdController.handle(request, response, nextFunction);
+});
+
+publicRoutes.post('/taxId/:taxId/unblock', (request: Request, response: Response, nextFunction: NextFunction) => {
+    return unblockTaxIdController.handle(request, response, nextFunction);
 });
 
 publicRoutes.post('/taxId', (request: Request, response: Response, nextFunction: NextFunction) => {
