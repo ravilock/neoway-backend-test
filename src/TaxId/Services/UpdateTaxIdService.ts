@@ -15,8 +15,6 @@ export default class UpdateTaxIdService {
             throw new ResourceNotFoundException();
         }
 
-        console.log(entity);
-
         await this.repository.update(entity);
     }
 }
