@@ -2,4 +2,4 @@
 cd $APP_HOME
 
 echo "Start production application server..."
-yarn build && yarn start
+-yarn knex migrate:latest --env production && yarn build && yarn start
