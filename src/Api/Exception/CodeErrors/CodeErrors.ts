@@ -44,3 +44,8 @@ export const CODE_ERROR_INTEGRATION_FAILED: ErrorDetailsDto = {
     code: 'INTEGRATION_FAILED',
     message: 'Integration error with partner',
 };
+
+export const CODE_ERROR_BLOCKED_TAX_ID: ErrorDetailsDto = {
+    code: 'BLOCKED_TAX_ID',
+    message: 'Tax Id Is Blocked',
+};
