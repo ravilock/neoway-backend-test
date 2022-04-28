@@ -34,8 +34,6 @@ export default class GetTaxIdTransformer implements IApiTransformer<TaxIdDto, Ge
             startDate: entity.startDate,
             createdAt: entity.createdAt,
             updatedAt: entity.updatedAt,
-            deletedAt: entity.deletedAt,
-            deleted: entity.deleted,
         });
     }
 
