@@ -39,7 +39,7 @@ export default class TaxIdRepository implements ITaxIdRepository {
     }
 
     public async delete(uuid: string): Promise<void> {
-        throw new Error('Method not implemented.');
+        await KnexInstance('taxIds').update({ deleteAt: new Date(), deleted: true }).where('uuid', uuid);
     }
 
     public async findByUuid(uuid: string): Promise<TaxIdEntity> {
