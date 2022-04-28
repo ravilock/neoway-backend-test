@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
 import { isAliveController } from '../Home/Index';
-import { getTaxIdController, listTaxIdsController, postTaxIdController, updateTaxIdController } from '../TaxId/Index';
+import { deleteTaxIdController, getTaxIdController, listTaxIdsController, postTaxIdController, updateTaxIdController } from '../TaxId/Index';
 
 const publicRoutes = express.Router();
 
@@ -22,6 +22,10 @@ publicRoutes.get('/taxId/:uuid', (request: Request, response: Response, nextFunc
 
 publicRoutes.put('/taxId/:uuid', (request: Request, response: Response, nextFunction: NextFunction) => {
     return updateTaxIdController.handle(request, response, nextFunction);
+});
+
+publicRoutes.delete('/taxId/:uuid', (request: Request, response: Response, nextFunction: NextFunction) => {
+    return deleteTaxIdController.handle(request, response, nextFunction);
 });
 
 export { publicRoutes };
