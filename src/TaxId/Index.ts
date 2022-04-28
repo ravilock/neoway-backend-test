@@ -8,6 +8,7 @@ import UpdateTaxIdController from './Actions/UpdateTaxIdController';
 import BlockTaxIdService from './Services/BlockTaxIdService';
 import DeleteTaxIdService from './Services/DeleteTaxIdService';
 import GetTaxIdService from './Services/GetTaxIdService';
+import IsTaxIdBlockedService from './Services/IsTaxIdBlockedService';
 import ListTaxIdsService from './Services/ListTaxIdsService';
 import PostTaxIdService from './Services/PostTaxIdService';
 import UnblockTaxIdService from './Services/UnblockTaxIdService';
@@ -42,6 +43,7 @@ const unblockTaxIdTransformer = new UnblockTaxIdTransformer();
 
 const blockTaxIdService = new BlockTaxIdService(taxIdBlocklistRepository);
 const unblockTaxIdService = new UnblockTaxIdService(taxIdBlocklistRepository);
+export const isTaxIdBlockedService = new IsTaxIdBlockedService(taxIdBlocklistRepository);
 
 export const postTaxIdController = new PostTaxIdController(postTaxIdTransformer, postTaxIdService);
 export const listTaxIdsController = new ListTaxIdsController(listTaxIdsTransformer, listTaxIdsService);
