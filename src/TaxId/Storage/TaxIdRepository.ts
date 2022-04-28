@@ -34,8 +34,22 @@ export default class TaxIdRepository implements ITaxIdRepository {
         throw new Error('Method not implemented.');
     }
 
-    public async findById(uuid: string): Promise<TaxIdEntity> {
-        throw new Error('Method not implemented.');
+    public async findByUuid(uuid: string): Promise<TaxIdEntity> {
+        const [queryResult] = <TaxIdEntity[]>(
+            await KnexInstance('taxIds')
+                .select('uuid')
+                .select('taxId')
+                .select('accountName')
+                .select('startDate')
+                .select('createdAt')
+                .select('updatedAt')
+                .select('deleteAt')
+                .select('deleted')
+                .where('uuid', uuid)
+                .limit(1)
+        );
+
+        return queryResult;
     }
 
     public async findAll(page?: number, pageSize?: number): Promise<TaxIdEntity[]> {

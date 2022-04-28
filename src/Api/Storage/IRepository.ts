@@ -5,7 +5,7 @@ export interface IRepository<T> {
 
     delete(uuid: string): Promise<void>;
 
-    findById(uuid: string): Promise<T>;
+    findByUuid(uuid: string): Promise<T>;
 
     findAll(page?: number, pageSize?: number): Promise<T[]>;
 }
