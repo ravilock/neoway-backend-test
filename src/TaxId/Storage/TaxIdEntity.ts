@@ -5,6 +5,4 @@ export default interface TaxIdEntity {
     startDate: Date;
     createdAt?: Date;
     updatedAt?: Date;
-    deletedAt?: Date;
-    deleted?: boolean;
 }
