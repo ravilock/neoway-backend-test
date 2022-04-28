@@ -1,19 +1,19 @@
 version: '3'
 
 services:
-  app-name:
+  tax-id-validator:
     entrypoint: /bin/sh './entrypoint.sh'
     env_file:
       - .env
     ports:
       - "9229:9229"
     networks:
-      - app-network
+      - tax-id-validator-network
     depends_on:
       - postgres
 
   postgres:
-    container_name: app_db
+    container_name: postgres
     image: postgres:14.2-alpine
     restart: always
     environment:
@@ -25,11 +25,10 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
     networks:
-      - app-network
+      - tax-id-validator-network
 
 networks:
-  app-network:
-    external: true
+  tax-id-validator-network:
 
 volumes:
   postgres: ~
