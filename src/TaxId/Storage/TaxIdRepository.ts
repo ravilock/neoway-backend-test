@@ -2,6 +2,7 @@ import ITaxIdRepository from './ITaxIdRepository';
 import TaxIdEntity from './TaxIdEntity';
 import { KnexInstance } from '../../Database/knex';
 import ListTaxIdsDto from '../Dtos/ListTaxIdsDto';
+import ResourceAlreadyExistsException from '../../Api/Exception/ResourceAlreadyExistsException';
 
 export default class TaxIdRepository implements ITaxIdRepository {
     public async findByTaxId(taxId: string, searchDeleted = false): Promise<TaxIdEntity> {
@@ -27,7 +28,14 @@ export default class TaxIdRepository implements ITaxIdRepository {
     }
 
     public async update(entity: TaxIdEntity): Promise<TaxIdEntity> {
-        throw new Error('Method not implemented.');
+        const taxIdEntity = await this.findByTaxId(entity.taxId);
+        if (taxIdEntity && taxIdEntity.taxId && taxIdEntity.uuid !== entity.uuid) {
+            throw new ResourceAlreadyExistsException([`TaxId '${entity.taxId}' already exists.`]);
+        }
+
+        await KnexInstance('taxIds').update(entity).where('uuid', entity.uuid);
+
+        return entity;
     }
 
     public async delete(uuid: string): Promise<void> {
