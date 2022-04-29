@@ -1,5 +1,6 @@
 import { Expose } from 'class-transformer';
-import { IsDateString, IsOptional } from 'class-validator';
+import { IsDateString, IsEnum, IsOptional } from 'class-validator';
+import { TaxIdSearchOrderParameterEnum } from '../Enums/TaxIdSearchOrderParameterEnum';
 
 export default class ListTaxIdsRequest {
     @Expose()
@@ -17,10 +18,15 @@ export default class ListTaxIdsRequest {
     @Expose()
     @IsOptional()
     @IsDateString()
-    public startDate: string;
+    public startDate?: string;
 
     @Expose()
     @IsOptional()
     @IsDateString()
-    public endDate: string;
+    public endDate?: string;
+
+    @Expose()
+    @IsOptional()
+    @IsEnum(TaxIdSearchOrderParameterEnum)
+    public orderBy?: string;
 }
